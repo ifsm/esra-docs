@@ -90,7 +90,6 @@ Kohonen self-organizing map (SOM) is shown on the left, discussed below. On the
 right, the songs in the collection are shown with metadata:
 
 .. figure:: fig/ESRA_umatrix.png
-   :scale: 50 %
    :alt: ESRA umatrix
 
 The menus on the top of the song list on the right enable to change between
@@ -104,13 +103,11 @@ The word Kachin does not appear in all song metadata displayed. This is because
 on this screen, only the most important metadata are shown:
 
 .. figure:: fig/ESRA_search.png
-   :scale: 50 %
    :alt: ESRA search
 
 In this example, when clicking on the top entry of the song list, the whole metadata are displayed:
 
 .. figure:: fig/ESRA_Metadata.png
-   :scale: 50 %
    :alt: ESRA Metadata
 
 On the top left, the song can be played. If the song also contains a video, the
@@ -131,14 +128,12 @@ might be good to contact us too. We provide you with an excel file where you
 can insert all metadata of all songs at once.
 
 .. figure:: fig/ESRA_UploadSong.png
-   :scale: 50 %
    :alt: ESRA Upload Song
 
 When songs are uploaded, they can be included in a new selection created by the
 user (and again only visible to this user):
 
 .. figure:: fig/ESRA_Selection.png
-   :scale: 50 %
    :alt: ESRA Selection
 
 In the metadata field shown above, one can add single songs to this collection,
