@@ -102,7 +102,7 @@ Below is an example of the term 'Kachin' searched for in 'Collection Bader'.
 The word Kachin does not appear in all song metadata displayed. This is because
 on this screen, only the most important metadata are shown:
 
-.. figure:: fig/ESRA_search.png
+.. figure:: fig/ESRA_Search.png
    :alt: ESRA search
 
 In this example, when clicking on the top entry of the song list, the whole metadata are displayed:
