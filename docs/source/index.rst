@@ -1,20 +1,18 @@
-.. Ethnographic Sound Recordings Archive documentation master file, created by
-   sphinx-quickstart on Sun Mar 14 09:49:16 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. Ethnographic Sound Recordings Archive documentation master file.
 
 Documentation of the Ethnographic Sound Recordings Archive
 ===============================================================================
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contents
 
    intro
+   faq
    tutorial
    tracks
    som
-   offline
+   user-content   
    references
 
 * :ref:`search`

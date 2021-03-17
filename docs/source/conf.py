@@ -21,12 +21,12 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'Ethnographic Sound Recordings Archive Documentation'
-copyright = '2021, Rolf Bader, Michael Blaß, Christian Koehn'
-author = 'Rolf Bader, Michael Blaß, Christian Koehn'
+copyright = '2021, Michael Blaß, Rolf Bader, Christian Koehn'
+author = 'Michael Blaß, Rolf Bader, Christian Koehn'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
-version = '0.1'
+release = '0.1.1'
+version = '0.1.1'
 
 
 # -- General configuration ---------------------------------------------------

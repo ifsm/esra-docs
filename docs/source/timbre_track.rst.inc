@@ -1,37 +1,76 @@
 Timbre Track
 ========================================
-
-All timbre features use a Fourier to analyze the sound in adjacent,
-non-overlapping frames. The analyzed discrete spectrum :math:`A_i` with
-amplitude A and N frequency entries :math:`f_i` is then further processed in
-the the four features. Here i is used as the vector bins, which map into
-frequency values through the sample frequency s and the analysis window length
-l in samples like math:`f_i` = i / (l / s).
+The TimbreTrack combines a set of audio features to model the timbral content of piece of music.
+These features are computed on short, consecutive portions of the input signal.
 
 Frequency domain features
 ----------------------------------------
+Frequency domain features are computed from a spectrogram. A spectrogram
+displays the distribution of energy within the audible frequency bands of
+consecutive, short portions of the input signal. ESRA computes its spectrograms using
+the Discrete Fourier Transform.
+
+The shape of each spectral distributions is related to how humans perceive the timbre
+of the related portion of a musical piece. Typically, the first four moments of a distribution
+are utilized to describe its shape.
 
 Spectral Centroid
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The spectral centroid C is the center of a spectrum, where the sum of amplitudes of frequencies above and below this center are equal, and is calculated as
+The first moment of a spectral energy distribution is the spectral centroid
+frequency.  It is a measure of central tendency. It marks the frequency that is
+considered as the center of a spectrum. It may be computed as the weighted
+arithetic mean of a frequency spectrum. 
 
-.. math::
-  C = \frac{\sum_{i=0}^N f_i A_i}{\sum_{i=0}^N A_i} \ .
+Several studies could confirm that the spectral centroid correlates strongly
+with the human auditory perception of *brightness*. Moreover, brightness is the
+most salient dimension of timbre perception.
 
-This corresponds to psychoacoustic brightness perception.
+Detailed information can be found in apollon.signal.features.spectral_centroid.
 
+.. !! include figure for illustration
 
 Spectral Spread
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Spectral Spread is the second moment of a spectral distribution and refers to
+its variance.  It is a measure of how much frequencies deviate from the
+spectral centroid frequency.
+
+Unlike Spectral Centroid, Spectral Spread does not map immediately to a
+perceptional quality.
+
+Detailed information can be found in apollon.signal.features.spectral_spread.
+
+.. !! include figure for illustration
 
 Spectral Skewness
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Spectral skewness is the third spectral moment. A skewness of 0 means that the
+distribution is perfectly symmetric. Negative values indicate a bias towards
+high frequency. Conversely, positive values indicate a displacement to low
+frequencies.
+
+Detailed information can be found in apollon.signal.features.spectral_skewness.
+
+.. !! include figure for illustration
 
 Spectral Kurtosis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Spectral kurtosis is the fourth spectral moment. It is a measure for the shape
+of the tails of a distribution.
+
+Detailed information can be found in apollon.signal.features.spectral_kurtosis.
+
+.. !! include figure for illustration
 
 Spectral Flux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Spectral flux is the change in amplitude per frequency bin over time. It is
+particularly useful for timbre.
+
+Detailed information can be found in apollon.signal.features.spectral_flux.
+
+.. !! include figure for illustration
+
 
 Time domain features
 ----------------------------------------
@@ -73,7 +112,10 @@ Then the correlation dimension is defined as
 .. math::
   D_C = \lim_{r \rightarrow 0} \frac{\ln C(r)}{\ln r} \ ,
 
-which is derived from the idea of the definition of the dimension (Bader2013). The exponent is the dimension which is the slope of a log-log plot. So practically we need to take the middle of the distribution and look for a constant slope in the log-log plot. This slope is the correlation dimension.
+which is derived from the idea of the definition of the dimension (Bader2013).
+The exponent is the dimension which is the slope of a log-log plot. So
+practically we need to take the middle of the distribution and look for a
+constant slope in the log-log plot. This slope is the correlation dimension.
 
 This is a very powerful tool as it has certain properties:
 
@@ -85,46 +127,6 @@ This is a very powerful tool as it has certain properties:
 6. If a component is below a certain amplitude threshold it is no longer considered by the algorithm.
 
 The fractal correlation dimension raises with initial transients, as they contain chaoticity. It is also a good measure of event density in a musical piece.
-
-7. Correlogram
-
-The correlogram is the opposite to the fractal dimensin. There the chaoticity
-is calculated, a correlogram calculates the harmonicity. While with very
-complex sounds the fractal dimension is at a maximum, with these sounds the
-correlogram becomes nearly zero.
-
-It is calculated for a time series y(t)  for time points t and frequency f = i
-/ S with sample frequency S and running sample delay i like
-
-.. math::
-  C(t, i) = \frac{A_{t,i}^M}{\sqrt{B_t^M C_{t,i}^M}} \ .
-
-Here :math:`A_{t,i}^M` is the autocorrelation sum
-
-.. math::
-  A_{t,i}^M = \sum_{j=0}^M y(t+j) y(t+i+j)
-
-at point t for sample delay i, corresponding to a frequency, over
-an autocorrelation length M. It is normalized by
-
-.. math::
-  B_t^M = \sum_{j=0}^M y(t+j)^2 \ ,
-
-as the squared length of the time series vector over M starting at t, and by
-
-.. math::
-  C_{t,i}^M = \sum_{j=0}^M y(t+i+j)^2 \ ,
-
-as the squared sum of the time series vector over M starting from t + i. So after inserting A, B, and C we have
-
-.. math::
-  C(t, i) = \frac{\sum_{j=0}^M y(t+j) y(t+i+j)}{\sqrt{\sum_{j=0}^M y(t+j)^2 \sum_{j=0}^M y(t+i+j)^2}} \ .
-
-The correlogram is equivalent to an autocorrelation of an autocorrelation. The
-first autocorrelation detects periodicities within the sound. These periodicity
-series are again used as the input of another autocorrelation. So by applying
-this convolution integral twice, we detect not single frequencies but
-periodicities of frequencies, harmonic series.
 
 
 Models of perceptional qualities
@@ -156,10 +158,10 @@ relevant.
 Roughness
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Roughness calculations have been suggested in several ways (for a review see
-:cite:p:`Schneider:2009aa`, :cite:p:`Bader:2013aa`). Basically two algorithms exist, calculating
-beating of two sinusoidals close to each other (Helmholtz ({Helmholtz1863),
-Helmholtz/Bader (Schneider2009), Sethares (Sethares1993), or integrating energy
-in critical bands on the cochlear (Fastl (Zwicker1999), Sothek (Sothek1994).
+:cite:p:`Schneider:2009aa` and :cite:p:`Bader:2013aa`). Basically two algorithms
+exist, calculating beating of two sinusoidals close to each other
+:cite:p:`Helmholtz:1863aa, Schneider:2009aa, Sethares:1993aa` or integrating
+energy in critical bands on the cochlear :cite:p:`Fastl:2007aa, Sottek:1994aa`.
 The former has been found to work very well with musical sounds, the latter
 with industrial noise. 
 
@@ -171,25 +173,20 @@ roughness :math:`R_n` is assumed between two frequencies with distance :math:`df
 have amplitudes :math:`A_1` and :math:`A_2` like
 
 .. math::
-  R_n = A_1 A_2 \frac{|df_n|}{f_r e^{-1}} e^{- |df_n|/f_r} \ .
+  R_n = A_1 A_2 \frac{|df_n|}{f_r e^{-1}} e^{- |df_n|/f_r} \,.
 
 with a maximum roughness at :math:`f_r=33` Hz. The roughness :math:`R` is then calculated
 as the sum of all possible sinusoidal combinatins like
 
 .. math::
-  R = \sum_{i=1}^N R_i \ .
+  R = \sum_{i=1}^N R_i \,.
 
-The only difference between the algorithm used in apollon and that described in
-(Schneider2009) is the precision with which the frequencies are calculated. To
-arrive at very precise values in (Schneider2009) a wavelet analysis is
-performed, allowing for an arbitrary precision of frequency estimation. As this
-is very expensive in terms of computational time, in the present study the
-above described Fourier analysis precision is used. In ({Schneider2009} the
-research aim was to tell the perceptual differences between tuning systems like
-Pure Tone, Werkmeister, Kirnberger, etc. in a Baroque piece of J.S. Bach which
-succeeded. The present analysis is not aiming for such subtle differences, but
-for the overall estimation of roughness.
+The goal of :cite:t:`Schneider:2009aa` was to model the perceptual differences of tuning systems like
+Pure Tone, Werkmeister, Kirnberger, etc. in a Baroque piece of J. S. Bach. This task required high temporal and spatial resolution in 
+the frequecy domain. The authors, therefore, utilized a `Discrete Wavelet Transform`_ (DWT). The roughness analysis in ESRA does not aim for such subtle differences, but
+for an overall estimation. Moreover, ESRA has to accomodate resource restrictions. To this end, the DWT was replaced by the Discrete Fourier Transform.
 
+.. _Discrete Wavelet Transform: https://en.wikipedia.org/wiki/Discrete_wavelet_transform
 
 Sharpness
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
