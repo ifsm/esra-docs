@@ -14,5 +14,6 @@ Documentation of the Ethnographic Sound Recordings Archive
    som
    user-content   
    references
+   contact
 
 * :ref:`search`
