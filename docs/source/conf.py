@@ -25,8 +25,8 @@ copyright = '2021, Michael Blaß, Rolf Bader, Christian Koehn'
 author = 'Michael Blaß, Rolf Bader, Christian Koehn'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.1'
-version = '0.1.1'
+release = '0.1.2'
+version = '0.1.2'
 
 
 # -- General configuration ---------------------------------------------------
