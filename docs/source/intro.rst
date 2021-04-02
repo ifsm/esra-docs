@@ -31,7 +31,7 @@ causative questions regarding similarities and divergences hidden in the deep
 structure of the manifold manifestations of musical expression in the world.
 
 We invite every interested person to sign up for free and have a stab at our
-services. Any feedback is very welcome.
+services. Any :ref:`feedback<contact-feedback>` is very welcome.
 
 .. _Ethongraphic Sound Recordings Archive: https://esra.fbkultur.uni-hamburg.de/
 

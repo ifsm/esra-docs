@@ -53,8 +53,9 @@ Yes, audio files must be longer than 30 seconds and shorter than 30 minutes.
 Upload large audio collection
 ========================================
 The current version of ESRA supports user uploads for single files. An
-interface for collection uploads is, however, planned. Nevertheless, please
-reach out to us if you wish to upload a collection.
+interface for collection uploads is, however, planned. Nevertheless,
+:ref:`please reach out to us<contact-feedback>` if you wish to upload a
+collection.
 
 .. _faq-publish-user-content:
 
